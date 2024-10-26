@@ -1,4 +1,4 @@
-package kopo;
+package kopo.level1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

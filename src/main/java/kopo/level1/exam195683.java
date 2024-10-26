@@ -1,29 +1,28 @@
-package kopo;
+package kopo.level1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class exam49086 {
+public class exam195683 {
 
     public static void main(String[] args) throws Exception{
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        long n = Integer.parseInt(br.readLine()) + 1;
+        String[] str = br.readLine().split(" ");
 
-        long res = 0;
+        float w = Integer.parseInt(str[0]);
+        float r = Integer.parseInt(str[1]);
 
-        while (n-- > 0) {
-            res += n * n;
-        }
+        int rm = (int) (w * (1 + r / 30));
 
-//        long res = n * (n + 1) * (2 * n + 1) / 6;
-
-        bw.write(res + "");
+        bw.write(rm + "");
         bw.flush();
         bw.close();
         br.close();
+
     }
 }
