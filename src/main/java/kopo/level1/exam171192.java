@@ -29,6 +29,7 @@ public class exam171192 {
 
             if (res < 0) {
                 str = "fail";
+                break;
             }
         }
 
