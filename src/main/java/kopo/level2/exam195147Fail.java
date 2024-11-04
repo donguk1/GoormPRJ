@@ -42,24 +42,39 @@ public class exam195147Fail {
         for (int i = 0; i < q; i++) {
             int res = 0;
 
-            int xMax = Arrays.stream(x[i])
-                    .max()
-                    .orElse(0);
-            int xMin = Arrays.stream(x[i])
-                    .min()
-                    .orElse(0);
-            int yMax = Arrays.stream(y[i])
-                    .max()
-                    .orElse(0);
-            int yMin = Arrays.stream(y[i])
-                    .min()
-                    .orElse(0);
+//            int yMaxIndex = maxIndex(y[i]);
+            int yMinIndex = minIndex(y[i]);
+//            int xMaxIndex = maxIndex(x[i]);
+            int xMinIndex = minIndex(x[i]);
 
-            for (int j = yMin; j <= yMax; j++) {
-                for (int k = xMin; k <= xMax; k++) {
-                    res += a[j][k];
+            int yMinCount = count(y[i], y[i][yMinIndex]);
+            int xMinCount = count(x[i], x[i][xMinIndex]);
+
+            int yMaxValue = Arrays.stream(y[i]).max().orElse(0);
+            int yMinValue = Arrays.stream(y[i]).min().orElse(0);
+            int xMaxValue = Arrays.stream(x[i]).max().orElse(0);
+            int xMinValue = Arrays.stream(x[i]).min().orElse(0);
+
+
+//            bw.write(Arrays.toString(x[i]) + "\n");
+//            bw.write(Arrays.toString(y[i]) + "\n");
+//            bw.write("yMaxValue : " + yMaxValue + "\n");
+//            bw.write("yMinValue : " + yMinValue + "\n");
+//            bw.write("xMaxValue : " + xMaxValue + "\n");
+//            bw.write("xMinValue : " + xMinValue + "\n");
+//            bw.write("yMinCount : " + yMinCount + "\n");
+//            bw.write("xMinCount : " + xMinCount + "\n");
+//            bw.write("==============================\n");
+
+            if (yMinCount  == 2 && xMinCount == 1) {
+                for (int j = yMinValue; j < yMaxValue; j++) {
+                    for (int k = xMinValue; k < xMaxValue ; k++) {
+                        bw.write(a[j][k] + "\n");
+                        res += a[j][k];
+                    }
                 }
             }
+
             bw.write(res + "\n");
         }
 
@@ -67,6 +82,41 @@ public class exam195147Fail {
         bw.flush();
         bw.close();
         br.close();
+    }
+
+    public static int minIndex(int[] array) {
+        int minIndex = 0;
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] <= array[minIndex]) {
+                minIndex = i;
+            }
+        }
+        return minIndex;
+    }
+
+    public static int maxIndex(int[] array) {
+        int maxIndex = 0;
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] >= array[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        return maxIndex;
+    }
+
+    public static int count(int[] array, int index) {
+        int count = 0;
+
+        for (int a : array) {
+            if (a == index) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
 }
