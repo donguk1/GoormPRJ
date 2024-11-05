@@ -56,26 +56,46 @@ public class exam195147Fail {
             int xMinValue = Arrays.stream(x[i]).min().orElse(0);
 
 
-//            bw.write(Arrays.toString(x[i]) + "\n");
-//            bw.write(Arrays.toString(y[i]) + "\n");
-//            bw.write("yMaxValue : " + yMaxValue + "\n");
-//            bw.write("yMinValue : " + yMinValue + "\n");
-//            bw.write("xMaxValue : " + xMaxValue + "\n");
-//            bw.write("xMinValue : " + xMinValue + "\n");
-//            bw.write("yMinCount : " + yMinCount + "\n");
-//            bw.write("xMinCount : " + xMinCount + "\n");
-//            bw.write("==============================\n");
+            bw.write(Arrays.toString(x[i]) + "\n");
+            bw.write(Arrays.toString(y[i]) + "\n");
+            bw.write("yMaxValue : " + yMaxValue + "\n");
+            bw.write("yMinValue : " + yMinValue + "\n");
+            bw.write("xMaxValue : " + xMaxValue + "\n");
+            bw.write("xMinValue : " + xMinValue + "\n");
+            bw.write("yMinCount : " + yMinCount + "\n");
+            bw.write("xMinCount : " + xMinCount + "\n");
 
             if (yMinCount  == 2 && xMinCount == 1) {
-                for (int j = yMinValue; j < yMaxValue; j++) {
-                    for (int k = xMinValue; k < xMaxValue ; k++) {
+                int max = 0;
+                for (int j = yMinValue; j <= yMaxValue; j++) {
+                    int start = 0;
+                    for (int k = xMinValue; k <= xMaxValue ; k++) {
+                        res += a[j][k];
+                        if (max == start) {
+                            break;
+                        }
+                        start++;
+                    }
+                    max++;
+                }
+            } else if (yMinCount  == 1 && xMinCount == 2) {
+                int max = xMaxValue - xMinValue;
+                for (int j = yMinValue; j <= yMaxValue; j++) {
+                    int start = 0;
+                    for (int k = xMinValue; k <= xMaxValue ; k++) {
                         bw.write(a[j][k] + "\n");
                         res += a[j][k];
+                        if (max == 0) {
+                            break;
+                        }
+                        start++;
                     }
+                    max--;
                 }
             }
+            bw.write(res + "\n"); // 필수
+            bw.write("==============================\n");
 
-            bw.write(res + "\n");
         }
 
 
