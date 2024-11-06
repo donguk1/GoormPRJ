@@ -14,36 +14,52 @@ public class exam49078Fail {
         int n = Integer.parseInt(br.readLine());
 
         int[] c = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(num -> Math.abs(Integer.parseInt(num)))
-                .sorted()
-                .distinct()
+                .mapToInt(Integer::parseInt)
                 .toArray();
 
         bw.write("c : " + Arrays.toString(c) + "\n");
 
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                if (Math.abs(c[i]) > Math.abs(c[j])) {
+                    int res = c[i];
+                    c[i] = c[j];
+                    c[j] = res;
+                }
+            }
+        }
+
+        bw.write("c : " + Arrays.toString(c) + "\n");
+
+        int minus = 0;
         int max = 0;
-        int res = c[0];
+        int res = Math.abs(c[0]);
 
         for (int i = 0; i < c.length - 1; i++) {
 //            bw.write(c[i] + " ");
 
-            if (c[i + 1] == c[i] + 1) {
+            if (Math.abs(c[i + 1]) == Math.abs(c[i] + 1)) {
 
 //                bw.write("c[i] : " + c[i] + "\n");
 
-                res += c[i + 1];
+                res += Math.abs(c[i + 1]);
+                minus += c[i + 1];
             } else {
-                // 연속이 끊긴 경우
-                max = Math.max(max, res); // 최대값을 갱신
-                res = c[i + 1]; // 새 구간의 시작값으로 초기화
+
+                max = Math.max(max, res);
+                res = Math.abs(c[i + 1]);
+                minus = c[i + 1];
 
             }
         }
 
-        max = Math.max(max, res);
+        if (minus < 0) {
+            bw.write("0");
+        }else {
+            max = Math.max(max, res);
 
-        bw.write(max + "");
-
+            bw.write(max + "");
+        }
         bw.flush();
         bw.close();
 
