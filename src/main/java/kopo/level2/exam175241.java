@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class exam175241Fail {
+public class exam175241 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -17,9 +17,10 @@ public class exam175241Fail {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        int[] q = new int[k];
+        int[] q = new int[n];
 
         int over = 0;
+        int under = 0;
         int push = 0;
         int pop = 0;
 
@@ -34,23 +35,18 @@ public class exam175241Fail {
 
                 } else {
                     q[push++] = Integer.parseInt(st.nextToken());
-                    if (push == k) {
-                        push = 0;
-                    }
                     over++;
+                    under++;
                 }
             } else if (Objects.equals(s, "pop")) {
-                if (q[pop] == 0) {
+                if (under <= 0) {
                     bw.write("Underflow\n");
                 } else {
                     bw.write(q[pop++] + "\n");
-                    if (pop == k) {
-                        pop = 0;
-                    }
                     over--;
+                    under--;
                 }
             }
-
         }
 
         bw.flush();
