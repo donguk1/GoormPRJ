@@ -23,17 +23,11 @@ public class exam49054 {
         String str = String.valueOf(b);
 
         while (str.length() > 1) {
-            int[] s = Arrays.stream(str.split(""))
+            int d = Arrays.stream(str.split(""))
                     .mapToInt(Integer::parseInt)
-                    .toArray();
+                    .sum();
 
-            int a = 0;
-
-            for (int j : s) {
-                a += j;
-            }
-
-            str = String.valueOf(a);
+            str = String.valueOf(d);
         }
 
         bw.write(str);
